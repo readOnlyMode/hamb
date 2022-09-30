@@ -1,0 +1,16 @@
+@import "../variables.scss";
+
+.header {
+  background-color: $grey;
+  color: $white;
+  text-align: center;
+  height: 80px;
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__btn:last-child {
+    margin-left: 10px;
+  }
+}

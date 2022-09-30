@@ -1,0 +1,33 @@
+<div class="appointment-list">
+  <p *ngIf="!appointments.length;else appointmentsExist">
+    You don't have any appointments yet
+
+    move to create appointment
+  </p>
+  <ng-template #appointmentsExist>
+    <div
+      cdkDropList
+      [cdkDropListData]="appointments"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+
+      <mat-card class="appointment-list__card" *ngFor="let appointment of appointments; trackBy: trackById" cdkDrag>
+        <mat-card-title-group>
+          <mat-card-title> {{appointment.title}}</mat-card-title>
+          <mat-card-subtitle>{{appointment.date | date}}</mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content>
+          {{appointment.description}}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button [routerLink]="['/appointment','edit', appointment.id]">Edit</button>
+          <button mat-raised-button color="warn" (click)="appointmentsStoreService.delete(appointment.id)">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>
+
+
+
+

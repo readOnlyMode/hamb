@@ -1,0 +1,30 @@
+<form [formGroup]="appointmentForm" (submit)="sendForm()" #formDirective="ngForm">
+  <h2>Create Appointment</h2>
+ <div class="display-flex flex-direction-column">
+   <mat-form-field appearance="outline">
+     <mat-label>Appointment title</mat-label>
+     <input formControlName="title" matInput placeholder="Add title" >
+   </mat-form-field>
+
+   <mat-form-field  appearance="outline">
+     <mat-label>Description</mat-label>
+     <textarea formControlName="description" matInput placeholder="Add description"></textarea>
+   </mat-form-field>
+
+   <mat-form-field appearance="outline" >
+     <mat-label>Select date</mat-label>
+     <input  formControlName="date" matInput [matDatepicker]="datepicker">
+     <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+     <mat-datepicker #datepicker>
+       <mat-datepicker-actions>
+         <button mat-button matDatepickerCancel>Cancel</button>
+         <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+       </mat-datepicker-actions>
+     </mat-datepicker>
+   </mat-form-field>
+ </div>
+
+  <button mat-raised-button [disabled]="!appointmentForm.valid" >{{isEditMode? 'Edit': 'Create'}}</button>
+</form>
+
+<p *ngIf="appointmentSuccessfullyCreated$ | async"> Appointment has been created</p>
